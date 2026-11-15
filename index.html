@@ -45,7 +45,7 @@
     height: 150px; background: #f6f8fa; display: flex;
     align-items: center; justify-content: center; color: #8c959f; font-size: 14px;
   }
-  .thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .thumb img { width: 100%; height: 100%; object-fit: contain; background: #ffffff; }
   .card-body { padding: 12px 14px 14px; }
   .card-title { font-weight: 600; font-size: 16px; margin: 0 0 4px; }
   .card-date { font-size: 13px; color: #57606a; margin: 0 0 6px; }
@@ -100,7 +100,7 @@
       <span class="muted">Feb 2025 – Jan 2026</span>
     </div>
     <p class="muted">Co-advised by Profs. Y.-T. Lin, P.-C. Tung and C.-K. Lin · NSTC-funded</p>
-    <p class="exp-text">Modeled the flight and ground-mode dynamics of a transformable UAV and tuned its attitude control with MRAC.</p>
+    <p class="exp-text">Set the development roadmap for a 4-person team; designed the transformable mechanism, all test rigs and the FPGA interfaces.</p>
   </div>
   <div class="exp">
     <div class="edu-row">
@@ -116,7 +116,7 @@
       <span class="muted">Oct 2024 – Jan 2025</span>
     </div>
     <p class="muted">Advisor: Prof. Y.-T. Lin · Industry collaboration with Lioho Machine Works, Ltd.</p>
-    <p class="exp-text">Developed an IMU-free motorcycle ABS that estimates caliper pressure from booster-valve current.</p>
+    <p class="exp-text">Built a CAN data-acquisition system and characterized the hydraulic booster valve for an industry ABS project.</p>
   </div>
   <div class="exp">
     <div class="edu-row">
@@ -124,18 +124,18 @@
       <span class="muted">Feb 2024 – Jul 2024</span>
     </div>
     <p class="muted">Advisor: Prof. P.-C. Tung · NSTC-funded, industry collaboration</p>
-    <p class="exp-text">Built vision-guided positioning for a Techman arm, reaching ±10 µm for automated terminal insertion.</p>
+    <p class="exp-text">Built the image-processing pipeline and the camera-to-arm calibration for an automated connector production line.</p>
   </div>
 
   <h2>Projects</h2>
   <div class="grid">
 
     <a class="card" href="projects/uav.html">
-      <div class="thumb">Image</div>
+      <div class="thumb"><img src="images/uav/flight-mode.jpg" alt="Multimodal UAV"></div>
       <div class="card-body">
         <p class="card-title">Multimodal UAV for Locating Victims</p>
         <p class="card-date">Capstone · Feb 2025 – Jan 2026</p>
-        <p class="card-text">Transformable UAV that flies and drives, with an MRAC-tuned flight controller.</p>
+        <p class="card-text">Lands and drives on wheels when a space is too tight to fly.</p>
       </div>
     </a>
 
@@ -144,7 +144,7 @@
       <div class="card-body">
         <p class="card-title">IMU-Free Motorcycle ABS</p>
         <p class="card-date">Intelligent Systems Lab · Oct 2024 – Jan 2025</p>
-        <p class="card-text">Estimates caliper pressure from booster-valve current instead of pressure sensors.</p>
+        <p class="card-text">Brake pressure from valve current, with no pressure sensors.</p>
       </div>
     </a>
 
@@ -153,7 +153,7 @@
       <div class="card-body">
         <p class="card-title">Vision-Guided Robotic Arm Positioning</p>
         <p class="card-date">Dynamics and Control Lab · Feb 2024 – Jul 2024</p>
-        <p class="card-text">Coarse-to-fine dual-camera positioning with ±10 µm accuracy for terminal insertion.</p>
+        <p class="card-text">±10 µm positioning on 150 µm connector holes with two cameras.</p>
       </div>
     </a>
 

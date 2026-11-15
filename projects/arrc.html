@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TVC Gimbal for MINI4 | Shiuan-Chi Ding</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #1f2328; background: #ffffff; line-height: 1.65;
+  }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 32px 24px 64px; }
+  .back { color: #0969da; text-decoration: none; font-size: 15px; }
+  .back:hover { text-decoration: underline; }
+  h1 { font-size: 30px; line-height: 1.25; margin: 18px 0 6px; }
+  .meta { color: #57606a; font-size: 15px; margin: 0 0 16px; }
+  .btns { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+  .btn {
+    display: inline-block; padding: 7px 14px; border: 1px solid #d0d7de; border-radius: 8px;
+    color: #0969da; text-decoration: none; font-size: 15px;
+  }
+  .btn:hover { border-color: #0969da; background: #f6f8fa; }
+  h2 { font-size: 21px; margin: 36px 0 10px; padding-bottom: 6px; border-bottom: 1px solid #d0d7de; }
+  h3 { font-size: 17px; margin: 24px 0 6px; }
+  p { margin: 0 0 12px; }
+  ul { margin: 0 0 12px; padding-left: 22px; }
+  li { margin-bottom: 6px; }
+  .row { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 14px 0 8px; }
+  figure { margin: 0; text-align: center; }
+  figure img { max-width: 100%; border: 1px solid #eaeef2; border-radius: 6px; }
+  figcaption { font-size: 13px; color: #57606a; margin-top: 4px; }
+  footer { margin-top: 48px; font-size: 13px; color: #8c959f; }
+  table { border-collapse: collapse; margin: 10px auto 14px; font-size: 14px; }
+  th, td { border: 1px solid #d0d7de; padding: 6px 12px; text-align: center; }
+  th { background: #f6f8fa; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back" href="../index.html">← Back to home</a>
+
+  <h1>Two-Axis TVC Gimbal for the MINI4 Rocket-Drone Testbed</h1>
+  <p class="meta">Advanced Rocket Research Center (ARRC), NYCU · Jul 2024 – Apr 2025<br>
+  Rocket Structure &amp; Avionics Group · Intern, then Project Member · With a fellow intern</p>
+
+  <div class="row">
+    <figure><img src="../images/arrc/gimbal-cad.jpg" alt="CAD model of the TVC gimbal" width="330"><figcaption>Gimbal CAD model</figcaption></figure>
+    <figure><img src="../images/arrc/gimbal-built.jpg" alt="Built gimbal on the testbed" width="290"><figcaption>Built and mounted on the testbed</figcaption></figure>
+  </div>
+
+  <h2>Overview</h2>
+  <p>
+    ARRC was developing HTTP-4, a vertical-landing rocket. A rocket flies only once, so its attitude
+    control, GPS and other methods cannot be tested again and again. We proposed MINI4, a smaller,
+    propeller-driven rocket drone built to HTTP-4's architecture and performance requirements, so the
+    team can try those methods repeatedly before using them on HTTP-4.
+  </p>
+  <p>
+    MINI4 has only one thruster, so it is underactuated and can be stabilized only by tilting that
+    thrust. This puts the thrust vector control (TVC) gimbal inside the control loop. Backlash in the
+    gimbal adds error to its response, and a moving mechanism can disturb the body it is meant to
+    stabilize. We designed a new gimbal with those two problems in mind and helped start the MINI4
+    project.
+  </p>
+
+  <h2>Mechanical design</h2>
+  <ul>
+    <li><strong>Linkages instead of gears.</strong> Each servo drives its frame through a linkage, so there is no gear backlash in the response.</li>
+    <li><strong>Three nested frames.</strong> The two tilt axes are decoupled, following the HTTP-4 design.</li>
+    <li><strong>Servos at the center.</strong> The assembly balances itself, with no added ballast.</li>
+  </ul>
+  <p>
+    We modeled it in SolidWorks and 3D-printed the frames, with metal shafts and bearings at each
+    joint. During testing, the servo mount on the second frame cracked. We thickened and filleted the
+    mount and moved its fastening points to the side, held by bolts and nuts instead of self-tapping
+    screws.
+  </p>
+  <div class="row">
+    <figure><img src="../images/arrc/printed-1.jpg" alt="3D-printed frames" width="250"><figcaption>3D-printed frames</figcaption></figure>
+    <figure><img src="../images/arrc/frame-fix.jpg" alt="Revised second frame" width="230"><figcaption>Revised second frame after the crack</figcaption></figure>
+  </div>
+
+  <h2>Servo-to-gimbal mapping</h2>
+  <p>
+    The linkage geometry makes the relation between servo angle and gimbal angle nonlinear. We
+    imported the assembly into Simscape Multibody, swept each frame over ±15° and recorded the servo
+    angle needed. Quadratic fits matched the simulation with R² &gt; 0.999. We then converted servo
+    angle to PWM pulse width (1500 µs + 10 µs per degree), so the attitude controller can command the
+    gimbal directly.
+  </p>
+  <div class="row">
+    <figure><img src="../images/arrc/simscape.jpg" alt="Simscape Multibody model of the gimbal" width="260"><figcaption>Simscape Multibody model</figcaption></figure>
+  </div>
+  <table>
+    <tr><th rowspan="2"></th><th colspan="2">Gimbal −15°</th><th colspan="2">Gimbal +15°</th></tr>
+    <tr><th>Servo angle</th><th>PWM</th><th>Servo angle</th><th>PWM</th></tr>
+    <tr><td>Servo 1</td><td>−8.90°</td><td>1411.0 µs</td><td>11.00°</td><td>1610.0 µs</td></tr>
+    <tr><td>Servo 2</td><td>8.21°</td><td>1582.1 µs</td><td>−7.03°</td><td>1429.7 µs</td></tr>
+  </table>
+  <p>
+    We suspected that the PWM values might carry small errors on the real servos. To keep the
+    controller stable, we designed a test rig that couples the servo horn to an encoder and measured
+    the actual servo angles. The test confirmed the mapping was usable.
+  </p>
+  <div class="row">
+    <figure><img src="../images/arrc/pwm-rig.jpg" alt="Servo PWM test rig with encoder" width="400"><figcaption>Servo PWM test rig with encoder</figcaption></figure>
+  </div>
+
+  <h2>Results</h2>
+  <ul>
+    <li>A linkage-driven two-axis gimbal with no gear backlash, decoupled axes and no added ballast.</li>
+    <li>Servo-to-gimbal relations over ±15° with R² &gt; 0.999, converted to PWM commands.</li>
+    <li>Verified the PWM mapping on real servos with an encoder rig.</li>
+    <li>The mapping was integrated into ARRC's attitude controller before MINI4's flight tests.</li>
+  </ul>
+
+  <footer><a class="back" href="../index.html">← Back to home</a></footer>
+
+</div>
+</body>
+</html>

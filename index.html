@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shiuan-Chi Ding</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #1f2328;
+    background: #ffffff;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 48px 24px 64px; }
+  .head { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+  .photo { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 1px solid #d0d7de; }
+  h1 { font-size: 36px; margin: 0; font-weight: 700; }
+  .tagline { font-size: 17px; color: #57606a; margin: 4px 0 12px; }
+  .links a { color: #0969da; text-decoration: none; margin-right: 16px; font-size: 15px; }
+  .links a:hover { text-decoration: underline; }
+  h2 {
+    font-size: 20px; margin: 40px 0 12px; padding-bottom: 6px;
+    border-bottom: 1px solid #d0d7de;
+  }
+  p { margin: 0 0 12px; }
+  .edu-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 16px; }
+  .muted { color: #57606a; font-size: 15px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    display: block; border: 1px solid #d0d7de; border-radius: 10px;
+    overflow: hidden; color: inherit; text-decoration: none;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .card:hover { border-color: #0969da; transform: translateY(-2px); }
+  .thumb {
+    height: 150px; background: #f6f8fa; display: flex;
+    align-items: center; justify-content: center; color: #8c959f; font-size: 14px;
+  }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .card-body { padding: 12px 14px 14px; }
+  .card-title { font-weight: 600; font-size: 16px; margin: 0 0 4px; }
+  .card-date { font-size: 13px; color: #57606a; margin: 0 0 6px; }
+  .card-text { font-size: 14px; color: #424a53; margin: 0; }
+  .pub { margin-bottom: 14px; }
+  .pub a { color: #0969da; text-decoration: none; font-size: 14px; margin-right: 10px; }
+  footer { margin-top: 48px; font-size: 13px; color: #8c959f; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="head">
+    <img class="photo" src="photo.jpg" alt="Shiuan-Chi Ding">
+    <div>
+      <h1>Shiuan-Chi Ding</h1>
+      <p class="tagline">Control Systems · Robotics · Embedded Systems</p>
+      <div class="links">
+        <a href="mailto:curryding0905@gmail.com">Email</a>
+        <a href="files/CV.pdf">CV (PDF)</a>
+        <a href="https://www.linkedin.com/in/shiuan-chi-ding">LinkedIn</a>
+        <a href="https://github.com/shiuanchi-ding">GitHub</a>
+      </div>
+    </div>
+  </header>
+
+  <h2>About</h2>
+  <p>
+    I graduated from National Central University, Taiwan, with a B.S. in Mechanical Engineering in June 2026.
+    I work on control systems for robots and vehicles, and I test them on hardware, not only in simulation.
+    My projects include an adaptive flight controller for a transformable UAV, a TVC gimbal for a
+    rocket-drone testbed, vision-guided positioning of a robotic arm to ±10 µm, and visual SLAM on a
+    mobile robot. I also build the embedded side, from STM32 firmware to FPGA interfaces.
+  </p>
+  <p>
+    In graduate school, I want to study dynamic modeling, state estimation and nonlinear control, so that
+    a controller stays stable when a robot meets conditions its model did not expect.
+  </p>
+
+  <h2>Education</h2>
+  <div class="edu-row">
+    <strong>National Central University (NCU), Taiwan</strong>
+    <span class="muted">Sep 2021 – Jun 2026</span>
+  </div>
+  <p class="muted">B.S. in Mechanical Engineering (Opto-Mechatronics Engineering Program)<br>
+  GPA: 3.74/4.3 (Overall), 3.82/4.3 (Major), 3.92/4.3 (Last 60 credits)</p>
+
+  <h2>Projects</h2>
+  <div class="grid">
+
+    <a class="card" href="projects/uav.html">
+      <div class="thumb">Image</div>
+      <div class="card-body">
+        <p class="card-title">Multimodal UAV for Locating Victims</p>
+        <p class="card-date">Capstone · Feb 2025 – Jan 2026</p>
+        <p class="card-text">Transformable UAV that flies and drives, with an MRAC-tuned flight controller.</p>
+      </div>
+    </a>
+
+    <a class="card" href="projects/abs.html">
+      <div class="thumb">Image</div>
+      <div class="card-body">
+        <p class="card-title">IMU-Free Motorcycle ABS</p>
+        <p class="card-date">Intelligent Systems Lab · Oct 2024 – Jan 2025</p>
+        <p class="card-text">Estimates caliper pressure from booster-valve current instead of pressure sensors.</p>
+      </div>
+    </a>
+
+    <a class="card" href="projects/vision-arm.html">
+      <div class="thumb">Image</div>
+      <div class="card-body">
+        <p class="card-title">Vision-Guided Robotic Arm Positioning</p>
+        <p class="card-date">Dynamics and Control Lab · Feb 2024 – Jul 2024</p>
+        <p class="card-text">Coarse-to-fine dual-camera positioning with ±10 µm accuracy for terminal insertion.</p>
+      </div>
+    </a>
+
+    <a class="card" href="projects/slam.html">
+      <div class="thumb">Image</div>
+      <div class="card-body">
+        <p class="card-title">Monocular Visual SLAM Mobile Robot</p>
+        <p class="card-date">Independent Project · Feb 2025 – Jun 2025</p>
+        <p class="card-text">ORB-SLAM3 on a Raspberry Pi robot, mapping a corridor without GPS.</p>
+      </div>
+    </a>
+
+    <a class="card" href="projects/warehouse.html">
+      <div class="thumb">Image</div>
+      <div class="card-body">
+        <p class="card-title">Automated Warehouse with Robotic Arm</p>
+        <p class="card-date">Independent Project · Feb 2024 – Jun 2024</p>
+        <p class="card-text">Delta-arm parcel drop-off and pick-up with sensor screening and QR retrieval.</p>
+      </div>
+    </a>
+
+    <a class="card" href="projects/compression.html">
+      <div class="thumb">Image</div>
+      <div class="card-body">
+        <p class="card-title">Lossless Compression for a Hyperspectral Imager</p>
+        <p class="card-date">Space Optics Lab · Dec 2022 – Jun 2023</p>
+        <p class="card-text">LZO codec on a space imager processor, 6–8× faster than WinRAR.</p>
+      </div>
+    </a>
+
+  </div>
+
+  <h2>Publications &amp; Presentations</h2>
+  <div class="pub">
+    X.-Z. Lin, Y.-T. Lin, Y.-H. Hsu, Y.-L. Wu, and <strong>S.-C. Ding</strong>.
+    “Development and Design of a Multimodal UAV System” (in Chinese).
+    <em>iFUZZY &amp; FUZZY 2025</em>, Hsinchu, Taiwan, Nov 2025.
+    Oral presentation by S.-C. Ding; Honorable Mention.<br>
+    <a href="files/uav-paper.pdf">[Paper]</a>
+  </div>
+  <div class="pub">
+    <strong>S.-C. Ding</strong>. “Lossless Compression Testing on a Hyperspectral Imager” (in Chinese).
+    <em>2023 National Space Science and Engineering Student Symposium</em>, Taoyuan, Taiwan, Jun 2023.
+    Oral and poster presentation.
+  </div>
+
+  <footer>Last updated: Nov 2026</footer>
+
+</div>
+</body>
+</html>

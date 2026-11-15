@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMU-Free Motorcycle ABS | Shiuan-Chi Ding</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #1f2328; background: #ffffff; line-height: 1.65;
+  }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 32px 24px 64px; }
+  .back { color: #0969da; text-decoration: none; font-size: 15px; }
+  .back:hover { text-decoration: underline; }
+  h1 { font-size: 30px; line-height: 1.25; margin: 18px 0 6px; }
+  .meta { color: #57606a; font-size: 15px; margin: 0 0 16px; }
+  .btns { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+  .btn {
+    display: inline-block; padding: 7px 14px; border: 1px solid #d0d7de; border-radius: 8px;
+    color: #0969da; text-decoration: none; font-size: 15px;
+  }
+  .btn:hover { border-color: #0969da; background: #f6f8fa; }
+  h2 { font-size: 21px; margin: 36px 0 10px; padding-bottom: 6px; border-bottom: 1px solid #d0d7de; }
+  h3 { font-size: 17px; margin: 24px 0 6px; }
+  p { margin: 0 0 12px; }
+  ul { margin: 0 0 12px; padding-left: 22px; }
+  li { margin-bottom: 6px; }
+  .row { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin: 14px 0 8px; }
+  figure { margin: 0; text-align: center; }
+  figure img { max-width: 100%; border: 1px solid #eaeef2; border-radius: 6px; }
+  figcaption { font-size: 13px; color: #57606a; margin-top: 4px; }
+  footer { margin-top: 48px; font-size: 13px; color: #8c959f; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back" href="../index.html">← Back to home</a>
+
+  <h1>IMU-Free Motorcycle ABS: Valve Current as a Brake-Pressure Signal</h1>
+  <p class="meta">Intelligent Systems Lab, NCU · Oct 2024 – Jan 2025 · Team of 4<br>
+  Advisor: Prof. Y.-T. Lin · Industry collaboration with Lioho Machine Works, Ltd.</p>
+
+  <div class="btns">
+    <a class="btn" href="../files/abs-report.pdf">Report (PDF)</a>
+  </div>
+
+  <div class="row">
+    <figure><img src="../images/abs/architecture.png" alt="Data-acquisition system architecture" width="760"><figcaption>Data-acquisition system: sensors, SPC560P, CAN and PC</figcaption></figure>
+  </div>
+
+  <h2>Overview</h2>
+  <p>
+    In hard braking, an ABS holds the wheel slip ratio near 0.2. To compute slip it needs the vehicle
+    speed, which is usually estimated with an IMU. An IMU cannot tell real deceleration from
+    disturbances, and it loses the true speed once a wheel slips. Our approach is to get the vehicle
+    speed from the braking force instead.
+  </p>
+  <p>
+    The braking force follows the caliper pressure, but pressure sensors are costly. So we asked a
+    narrower question first: can the current of the ABS inlet (pressure-increase) valve replace a
+    pressure sensor?
+  </p>
+
+  <h2>Data acquisition</h2>
+  <p>
+    We built the test bench on a real rear-wheel ABS hydraulic circuit. An SPC560P microcontroller
+    samples the master-cylinder pressure, the wheel-cylinder pressure and the inlet-valve current
+    through its ADC, averages each signal over 1 s and sends the values over CAN. A Kvaser interface
+    passes the CAN messages to a PC for logging and analysis.
+  </p>
+  <div class="row">
+    <figure><img src="../images/abs/hydraulic.png" alt="Rear-wheel brake hydraulic circuit" width="260"><figcaption>Rear-wheel brake hydraulic circuit</figcaption></figure>
+    <figure><img src="../images/abs/pressure-sensor.jpg" alt="Pressure sensor on the brake line" width="240"><figcaption>Pressure sensor</figcaption></figure>
+    <figure><img src="../images/abs/mcu.jpg" alt="SPC560P microcontroller board" width="234"><figcaption>SPC560P board</figcaption></figure>
+  </div>
+
+  <h2>Experiments and findings</h2>
+  <h3>Valve state versus PWM duty cycle</h3>
+  <p>
+    We drove the inlet valve at 100%, 74.2%, 73.8%, 73.4% and 73% duty under a 150 N brake force. The
+    plunger stayed fully pulled in down to 73.8% and did not pull in at 73%. At 73.4% it was unstable:
+    at 150 N it was pushed open once the pressure difference across it reached about 40 bar, while at
+    100 N (about 33 bar) it stayed closed.
+  </p>
+  <div class="row">
+    <figure><img src="../images/abs/duty-73-4.png" alt="Pressures and valve current at 73.4% duty, 150 N" width="420"><figcaption>73.4% duty, 150 N: the wheel-cylinder pressure rises once the plunger is pushed open</figcaption></figure>
+  </div>
+  <h3>Current drop at 100% duty</h3>
+  <p>
+    At 100% duty the valve current fell while the valve was on. The drop had the same slope at 0 N,
+    100 N and 150 N, so it does not come from pressure. We traced it to coil heating at high current
+    and long on-time.
+  </p>
+  <h3>Current rise versus pressure</h3>
+  <p>
+    At 69% and 100% duty, the current rise repeated closely every time the valve switched on. But the
+    rise curves at 50 N, 100 N and 150 N overlapped, so they carried no clear pressure information.
+  </p>
+
+  <h2>Results</h2>
+  <ul>
+    <li>Built a CAN data-acquisition system that logs both cylinder pressures and the valve current.</li>
+    <li>Mapped the valve plunger states across duty cycles and found the unstable point at 73.4% duty (about 40 bar).</li>
+    <li>Showed that the current drop at 100% duty comes from coil heating, not pressure.</li>
+    <li>Found that the inlet-valve current alone does not track pressure, which pointed the next stage to the outlet valve and the return pump.</li>
+  </ul>
+
+  <footer><a class="back" href="../index.html">← Back to home</a></footer>
+
+</div>
+</body>
+</html>

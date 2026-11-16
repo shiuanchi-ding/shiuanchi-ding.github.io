@@ -18,8 +18,15 @@
   .photo { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 1px solid #d0d7de; }
   h1 { font-size: 36px; margin: 0; font-weight: 700; }
   .tagline { font-size: 17px; color: #57606a; margin: 4px 0 12px; }
-  .links a { color: #0969da; text-decoration: none; margin-right: 16px; font-size: 15px; }
-  .links a:hover { text-decoration: underline; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .links a {
+    display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px;
+    border: 1px solid #d0d7de; border-radius: 8px; color: #0969da;
+    text-decoration: none; font-size: 14px;
+  }
+  .links a:hover { border-color: #0969da; background: #f6f8fa; }
+  .links svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .loc { font-size: 14px; color: #57606a; margin: 0 0 10px; }
   h2 {
     font-size: 20px; margin: 40px 0 12px; padding-bottom: 6px;
     border-bottom: 1px solid #d0d7de;
@@ -63,11 +70,12 @@
     <div>
       <h1>Shiuan-Chi Ding</h1>
       <p class="tagline">Control Systems · Robotics · Embedded Systems</p>
+      <p class="loc">B.S. in Mechanical Engineering, National Central University · Taoyuan, Taiwan</p>
       <div class="links">
-        <a href="mailto:curryding0905@gmail.com">Email</a>
-        <a href="files/CV.pdf">CV (PDF)</a>
-        <a href="https://www.linkedin.com/in/shiuan-chi-ding">LinkedIn</a>
-        <a href="https://github.com/shiuanchi-ding">GitHub</a>
+        <a href="mailto:curryding0905@gmail.com"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>curryding0905@gmail.com</a>
+        <a href="files/CV.pdf"><svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M8 13h8M8 17h5"/></svg>CV (PDF)</a>
+        <a href="https://www.linkedin.com/in/shiuan-chi-ding"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>LinkedIn</a>
+        <a href="https://github.com/shiuanchi-ding"><svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg>GitHub</a>
       </div>
     </div>
   </header>
@@ -210,7 +218,7 @@
     <a href="files/compression-report.pdf">[Report]</a>
   </div>
 
-  <footer>Last updated: Nov 2026</footer>
+  <footer>© 2026 Shiuan-Chi Ding · Last updated Nov 2026</footer>
 
 </div>
 </body>
